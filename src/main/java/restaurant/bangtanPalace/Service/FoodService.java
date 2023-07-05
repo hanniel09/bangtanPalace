@@ -10,6 +10,7 @@ import restaurant.bangtanPalace.domain.Food;
 import restaurant.bangtanPalace.exception.BadRequestException;
 import restaurant.bangtanPalace.mapper.FoodMapper;
 import restaurant.bangtanPalace.request.FoodPostRequestBody;
+import restaurant.bangtanPalace.request.FoodPutRequestBody;
 
 import java.util.List;
 
@@ -38,5 +39,12 @@ public class FoodService {
 
     public void delete(long id) {
         foodRepository.delete(findByIdOrThrowBadRequestException(id));
+    }
+
+    public void replace(FoodPutRequestBody foodPutRequestBody) {
+        Food savedFood = findByIdOrThrowBadRequestException(foodPutRequestBody.getId());
+        Food food = FoodMapper.INSTANCE.toFood(foodPutRequestBody);
+        food.setId(savedFood.getId());
+        foodRepository.save(food);
     }
 }

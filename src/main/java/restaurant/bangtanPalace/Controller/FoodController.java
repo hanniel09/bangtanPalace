@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import restaurant.bangtanPalace.Service.FoodService;
 import restaurant.bangtanPalace.domain.Food;
 import restaurant.bangtanPalace.request.FoodPostRequestBody;
+import restaurant.bangtanPalace.request.FoodPutRequestBody;
 
 import java.util.List;
 
@@ -41,6 +42,12 @@ public class FoodController {
     @DeleteMapping(path = "/{id}")
     public ResponseEntity<Void> delete(@PathVariable long id){
         foodService.delete(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @PutMapping
+    public ResponseEntity<Void> replace(@RequestBody FoodPutRequestBody foodPutRequestBody){
+        foodService.replace(foodPutRequestBody);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

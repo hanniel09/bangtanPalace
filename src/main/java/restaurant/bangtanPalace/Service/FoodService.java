@@ -36,4 +36,7 @@ public class FoodService {
     }
 
 
+    public void delete(long id) {
+        foodRepository.delete(findByIdOrThrowBadRequestException(id));
+    }
 }

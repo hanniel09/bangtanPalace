@@ -18,6 +18,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class FoodController {
     private final FoodService foodService;
+
     @GetMapping()
     public ResponseEntity<Page<Food>> list(Pageable pageable){
         return ResponseEntity.ok(foodService.listAll(pageable));
@@ -28,14 +29,18 @@ public class FoodController {
         return ResponseEntity.ok(foodService.findByIdOrThrowBadRequestException(id));
     }
 
-
     @GetMapping(path = "/foods")
     public ResponseEntity<List<Food>> listAll() {
         return ResponseEntity.ok(foodService.listAllNonPageable());
     }
-    @PostMapping
+    @PostMapping()
     public ResponseEntity<Food> save(@RequestBody @Valid FoodPostRequestBody foodPostRequestBody){
-        return new ResponseEntity<>(foodService.save(foodPostRequestBody), HttpStatus.OK);
+        return new ResponseEntity<>(foodService.save(foodPostRequestBody), HttpStatus.CREATED);
+    }
 
+    @DeleteMapping(path = "/{id}")
+    public ResponseEntity<Void> delete(@PathVariable long id){
+        foodService.delete(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

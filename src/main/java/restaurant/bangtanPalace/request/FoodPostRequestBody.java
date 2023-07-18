@@ -15,6 +15,6 @@ public class FoodPostRequestBody {
     @NotEmpty(message = "The food name cannot be empty")
     private String title;
     private String image;
-    private Integer price;
+    private Float price;
 }
 

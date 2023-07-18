@@ -34,6 +34,7 @@ public class FoodController {
     public ResponseEntity<List<Food>> listAll() {
         return ResponseEntity.ok(foodService.listAllNonPageable());
     }
+
     @PostMapping()
     public ResponseEntity<Food> save(@RequestBody @Valid FoodPostRequestBody foodPostRequestBody){
         return new ResponseEntity<>(foodService.save(foodPostRequestBody), HttpStatus.CREATED);

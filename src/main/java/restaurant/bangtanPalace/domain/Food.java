@@ -22,5 +22,5 @@ public class Food {
 
     private String title;
     private String image;
-    private Integer price;
+    private Float price;
 }

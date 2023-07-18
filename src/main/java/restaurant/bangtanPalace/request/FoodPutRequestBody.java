@@ -12,6 +12,6 @@ public class FoodPutRequestBody {
     private Long id;
     private String title;
     private String image;
-    private Integer price;
+    private Float price;
 
 }

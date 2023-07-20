@@ -12,7 +12,9 @@ import restaurant.bangtanPalace.exception.BadRequestException;
 import restaurant.bangtanPalace.mapper.FoodMapper;
 import restaurant.bangtanPalace.request.FoodPostRequestBody;
 import restaurant.bangtanPalace.request.FoodPutRequestBody;
+import software.amazon.awssdk.core.sync.RequestBody;
 import software.amazon.awssdk.services.s3.S3Client;
+import software.amazon.awssdk.services.s3.model.PutObjectRequest;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -44,6 +46,20 @@ public class FoodService {
         // Convert Base64 image data to ByteBuffer
         byte[] imageBytes = java.util.Base64.getDecoder().decode(foodPostRequestBody.getImage());
         ByteBuffer imageByteBuffer = ByteBuffer.wrap(imageBytes);
+
+        // Generate unique key for the image in Amazon S3
+        String imageName = java.util.UUID.randomUUID().toString();
+
+        // Upload the image to Amazon S3
+        PutObjectRequest putObjectRequest = PutObjectRequest.builder()
+                .bucket(bucketName)
+                .key(imageName)
+                .build();
+        s3Client.putObject(putObjectRequest, RequestBody.fromByteBuffer(imageByteBuffer));
+
+        // Save the Food object with the image URL in the database
+        Food food = FoodMapper.INSTANCE.toFood(foodPostRequestBody);
+        food.setImage("https://" + bucketName + ".s3.amazonaws.com/" + imageName);
         return foodRepository.save(FoodMapper.INSTANCE.toFood(foodPostRequestBody));
     }
 

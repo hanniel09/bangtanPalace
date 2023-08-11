@@ -12,6 +12,7 @@ import restaurant.bangtanPalace.domain.Food;
 import restaurant.bangtanPalace.request.FoodPostRequestBody;
 import restaurant.bangtanPalace.request.FoodPutRequestBody;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -36,7 +37,7 @@ public class FoodController {
     }
 
     @PostMapping()
-    public ResponseEntity<Food> save(@RequestBody @Valid FoodPostRequestBody foodPostRequestBody){
+    public ResponseEntity<Food> save(@RequestBody @Valid FoodPostRequestBody foodPostRequestBody) throws IOException {
         return new ResponseEntity<>(foodService.save(foodPostRequestBody), HttpStatus.CREATED);
     }
 

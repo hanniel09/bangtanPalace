@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import restaurant.bangtanPalace.Repository.UserRepository;
 import restaurant.bangtanPalace.domain.User;
+import restaurant.bangtanPalace.exception.BadRequestException;
 
 import java.util.List;
 
@@ -15,6 +16,11 @@ public class UserService {
 
     public List<User> listAll(){
         return userRepository.findAll();
+    }
+
+    public User findById(Long id){
+        return userRepository.findById(id)
+                .orElseThrow(() -> new BadRequestException("User id not found"));
     }
 
     @Transactional

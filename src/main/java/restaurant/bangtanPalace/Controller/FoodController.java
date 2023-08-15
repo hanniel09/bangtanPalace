@@ -25,7 +25,7 @@ public class FoodController {
     public ResponseEntity<Page<Food>> list(Pageable pageable){
         return ResponseEntity.ok(foodService.listAll(pageable));
     }
-
+ 
     @GetMapping(path = "/{id}")
     public ResponseEntity<Food> findById(@PathVariable long id){
         return ResponseEntity.ok(foodService.findByIdOrThrowBadRequestException(id));

@@ -8,6 +8,7 @@ import restaurant.bangtanPalace.domain.User;
 import restaurant.bangtanPalace.exception.BadRequestException;
 import restaurant.bangtanPalace.mapper.UserMapper;
 import restaurant.bangtanPalace.request.User.UserPostRequestBody;
+import restaurant.bangtanPalace.request.User.UserPutRequestBody;
 
 import java.util.List;
 
@@ -34,5 +35,11 @@ public class UserService {
         userRepository.delete(findById(id));
     }
 
+    public void update(UserPutRequestBody userPutRequestBody){
+        User savedUser = findById(userPutRequestBody.getId());
+        User user = UserMapper.INSTANCE.toUser(userPutRequestBody);
+        user.setId(savedUser.getId());
+        userRepository.save(user);
+    }
 
 }

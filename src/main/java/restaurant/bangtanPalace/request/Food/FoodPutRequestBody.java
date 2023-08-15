@@ -1,5 +1,4 @@
-package restaurant.bangtanPalace.request;
-
+package restaurant.bangtanPalace.request.Food;
 
 import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
@@ -9,12 +8,10 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Builder
-@AllArgsConstructor
-@NoArgsConstructor
-public class FoodPostRequestBody {
-    @NotEmpty(message = "The food name cannot be empty")
+public class FoodPutRequestBody {
+    private Long id;
     private String title;
     private String image;
     private Float price;
-}
 
+}

@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import restaurant.bangtanPalace.Service.UserService;
 import restaurant.bangtanPalace.domain.User;
+import restaurant.bangtanPalace.request.User.UserPostRequestBody;
 
 import java.util.List;
 
@@ -27,8 +28,8 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<User> save(@RequestBody @Valid User user){
-        return new ResponseEntity<>(userService.save(user), HttpStatus.CREATED);
+    public ResponseEntity<User> save(@RequestBody @Valid UserPostRequestBody userPostRequestBody){
+        return new ResponseEntity<>(userService.save(userPostRequestBody), HttpStatus.CREATED);
     }
 
     @DeleteMapping(path = "/{id}")

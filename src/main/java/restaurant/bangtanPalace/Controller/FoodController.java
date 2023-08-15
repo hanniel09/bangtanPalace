@@ -9,8 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import restaurant.bangtanPalace.Service.FoodService;
 import restaurant.bangtanPalace.domain.Food;
-import restaurant.bangtanPalace.request.FoodPostRequestBody;
-import restaurant.bangtanPalace.request.FoodPutRequestBody;
+import restaurant.bangtanPalace.request.Food.FoodPostRequestBody;
+import restaurant.bangtanPalace.request.Food.FoodPutRequestBody;
 
 import java.io.IOException;
 import java.util.List;

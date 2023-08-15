@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 import restaurant.bangtanPalace.Repository.UserRepository;
 import restaurant.bangtanPalace.domain.User;
 import restaurant.bangtanPalace.exception.BadRequestException;
+import restaurant.bangtanPalace.mapper.UserMapper;
+import restaurant.bangtanPalace.request.User.UserPostRequestBody;
 
 import java.util.List;
 
@@ -24,11 +26,13 @@ public class UserService {
     }
 
     @Transactional
-    public User save(User user){
-        return userRepository.save(user);
+    public User save(UserPostRequestBody userPostRequestBody){
+        return userRepository.save(UserMapper.INSTANCE.toUser(userPostRequestBody));
     }
 
     public void delete(Long id){
         userRepository.delete(findById(id));
     }
+
+
 }
